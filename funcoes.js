@@ -27,3 +27,36 @@ function abs (x){
 }else{
     return -x;
 }
+function factorial(n){
+    var product = 1;
+    while(n > 1){
+        product *= n;
+        n--;
+    }
+    return product;
+}
+factorial(4)
+function factorial(n){
+    var i, product = 1;
+    for(i=2; i<= n; i++)
+    product *= i;
+return product;
+}
+factorial(5)// => 120: 1*2*3*4*5
+//vamos definir uma função contrutora para inicializar novo objeto point
+function Point (x,y){//por convenção, as contrutoras começam com a letra maiuscula
+    this.x = x; // a palavra chave é this é o novo objeto que esta sendo inciializado
+    this.y = y;//armazena os argumentos da função como propriedade
+};//nao precisa de retorno
+
+//usa uma função contrutora com a palavra chave new para criar instancias
+var p = new Point(1,1);
+//defeinir metodos para objetos Point
+//prototype associado a função construtora
+Point.prototype.r = function(){
+    return Math.sqrt(
+        this.x * this.x + 
+        this.y * this.y
+    );
+};
+//agora o Point b e todos os futuros objetos Point herda o metodo R()
