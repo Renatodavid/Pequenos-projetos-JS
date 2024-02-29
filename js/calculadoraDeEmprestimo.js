@@ -55,3 +55,37 @@ window.onload = function(){
 };
 if(!window.XMLHttpRequest)return;
 
+var  ad = document.getElementById("lenders");
+if(!ad) return;
+
+var url = "getlenders.php"+"?amt=" 
++ encodeURIComponent(amount)+"&apr=" 
++ encodeURIComponent(apr)+"yrs=" 
++ encodeURIComponent(years) + "zip="
+ + encodeURIComponent(zipcode) ;
+
+ var req = new XMLHttpRequest();
+ req.open("GET",url);
+ req.send(null);
+
+ req.onreadystatechange = function(){
+    if(req.readyState == 4 && req.status == 200){
+        var response = req.responseText;
+        var lenders = JSON.parse(response);// analisa o array js
+        var list = "";
+        for (var i = 0; i < lenders.length; i++) {
+            list += ""<li><a href='""+lenders[i].url+""+lenders[i].name + "" '></a>
+             
+        }
+        ad.innerHTML = "<ul>" + list + "</ul>";
+    }
+ }
+
+ function char(principal,interest,monthly,payments){
+ var graph = document.getElementById("graph");
+ graph.width = graph.width;
+ if(arguments.length == 0 || !graph.getContext)return;
+ var g = graph.getContext("2d");
+ var width = graph.width, height = graph.height;
+
+}
