@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitulo 13 javaScript em navegadores web</title>
+    <script src="introducao.js"></script>
+</head>
+<body>
+    <p>oi isso e html</p>
+    <script>
+        //e este e um codigo javascript do lado do cliente literalmente
+       // incorporado no arquivo html
+       //Capitulo 14 objeto window
+       function moveon(){
+        var answer = confirm("ready to move on");
+        //se ele clicou no botao "ok", faz o navegador carregar uma nova pagina
+        if(answer)window.location = "wwww.google.com";
+       }
+       //executa a função definida acima por 1 minuto(60.000milisegundos a partir de agora)
+       // escrevendo Scripts de Documentos
+       //exibe uma mensagem em uma seção de saida de deupração especial do documento
+       function debug(msg){
+        //localiza a secção de depuração do documento , examinando os atributos de indentificação
+        var log = document.getElementById("debuglog")
+        //se não existe elemento algum com identificação "debuglog"cria um.
+        if(!log){
+            log = document.createElement("div");
+            log.id = "debuglog";
+
+            log.innerHTML ="<h1>debug log </h1>";
+            document.body.appendChild(log);
+            //agora coloca a mensagem em seu proprio <pre>e a anexa no log
+        }
+        var pre = document.createElement("pre");
+        var text = document.createTextNode(msg);
+        pre.appendChild(text);
+        log.appendChild(pre);
+
+       }
+       //capitulo 15 script css
+       function hide(e, reflow){//Oculta o elemnto e faz scrpit de seu estilo
+        if(reflow){// se o 2° argumento é verdadeiro
+            e.style.display = "nome"//oculta o elemento e utiliza  seu espaço
+        }else{//caso contrario
+            e.style.visibility = "hidden";//torna invisivel, mais deixa seu espaço
+        }
+       }
+       function highligth(e){
+        if(!e.className)e.className = "hilite";
+       else e.className += "hilite"
+       }
+       window.onload = function(){
+        var imagens = document.getElementsByTagName("img");
+        for( var i = 0; i < imagens.length; i ++){
+            var image = images[i];
+            if(image.addEventListener)
+            image.addEventListener("click ", hide, false);
+
+            else
+                image.attachEvent("onclick",hide);
+
+        }
+        function hide(event){event.target.style.visibility = "hidden";}     
+        
+       };
+       function debug(msg){
+        var log = $("#debuglog");
+        if(log.length == 0){
+            log = $("<div id='debuglog'><h1>debug log</h1></div>");
+            log.appendTo(document.body);
+        }
+        log.append($("<pre/>").text(msg));
+       }
+    </script>
+    <button onclick="hide(this, true); debug('hide button 1');">Hide1</button>
+    <button onclick="hide (this); debug ('hide button 2');">hide2</button>
+</body>
+</html>
